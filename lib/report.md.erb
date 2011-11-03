@@ -1,0 +1,35 @@
+Title:			SNV Comparison Report
+Subtitle:		A side-by-side comparison
+Format:			complete
+CSS:        report.css
+
+# SNV Comparison Report
+
+- Left file: <%= left_file %>
+- Right file: <%= right_file %>
+- SNPs sequenced in both profiles: <%= both_rsid.length %> (<%= 100.0 * both_rsid.length / left.length %>% of left and <%= 100.0 * both_rsid.length / right.length %>% of right.)
+- Same genotype when SNV in both profiles: <%= rsid_same.length %> (<%= "%.3f" % (100.0 * rsid_same.length / left.length) %>% of left and <%= "%.3f" % (100.0 * rsid_same.length / right.length) %>% of right.))
+- Differing genotypes when SNV in both profiles: <%= rsid_diff.length %> (<%= "%.3f" % (100.0 * rsid_diff.length / left.length) %>% of left and <%= "%.3f" % (100.0 * rsid_diff.length / right.length) %>% of right.))
+- Generated <%= Time.now.strftime("%m/%d/%Y at %I:%M%p") %>.
+
+## Same Genotype
+
+The following <%= rsid_same.length %> SNVs are the *same* in both profiles. Click the links in the last column for access to scientific literature.
+
+[Same Genotype]
+| rsID | Genotype | Reference Position | Links ||
+ -------- |
+<% rsid_same.each do |n| %><%= n[0][:rsid] %> | <%= n[0][:genotype] %> | <%= n[0][:position] %> |<%= SNP.markdown_links(n[0]) %>
+<% end %>
+
+
+## Different Genotype
+
+The follow <%= rsid_diff.length %> SNVs *differ* between the profiles. Click the links in the last column for access to scientific literature.
+
+[Same Genotype]
+| rsID | Left Genotype | Right Genotype | Reference Position | Links ||
+ -------- |
+<% rsid_diff.each do |n| %><%= n[0][:rsid] %> | <%= n[0][:genotype] %> | <%= n[1][:genotype] %> | <%= n[0][:position] %> | <%= SNP.markdown_links(n[0]) %>
+<% end %>
+

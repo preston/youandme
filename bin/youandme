@@ -1,0 +1,102 @@
+#!/usr/bin/env ruby
+#
+# An script to compare to 23andme SNP data files.
+#
+# Author: Preston Lee
+# License: Apache 2
+#
+
+# Runtime libraries:
+require 'getopt/long'
+require 'erb'
+
+
+# Our libraries:
+current_dir = File.dirname(File.expand_path(__FILE__))
+lib_path = File.join(current_dir, '..', 'lib')
+$LOAD_PATH.unshift current_dir
+# y $LOAD_PATH
+require 'youandme'
+
+def print_help_and_exit
+	puts "#{$0} [--multimarkdown <report_name.mmd>] --left <23andme_data_file.txt> --right <23andme_data_file.txt>"
+	puts "#{$0} [-m <report_name.mmd>] -l <23andme_data_file.txt> -r <23andme_data_file.txt>"
+	exit(1)
+end
+
+
+begin
+	opt = Getopt::Long.getopts(
+	   ["--left", "-l", Getopt::REQUIRED],
+	   ["--right", "-r", Getopt::REQUIRED],
+	   ["--multimarkdown", "-m", Getopt::OPTIONAL],
+	   ["--help", "-h", Getopt::BOOLEAN]
+	)
+rescue
+	print_help_and_exit
+end
+
+
+
+if(opt['help'])
+	print_help_and_exit
+end
+
+puts "Checking data file existyness..."
+loader = YouAndMe::RawDataFileLoader.new
+left_file = opt['left']
+right_file = opt['right']
+unless(loader.check_file(left_file) and loader.check_file(right_file))
+	puts "Please specify valid data files!"
+	print_help_and_exit
+end
+
+puts "Parsing data files... (may take a while)"
+
+
+left = loader.load_file(left_file).sort{|a,b| a[:rsid] <=> b[:rsid]}
+puts "\tLoaded #{left.length} SNPs from #{left_file}"
+# y left[0..4]
+right = loader.load_file(right_file).sort{|a,b| a[:rsid] <=> b[:rsid]}
+puts "\tLoaded #{right.length} SNPs from #{right_file}"
+
+puts "Creating indexes..."
+puts "\tIndexing left data..."
+left_rsid					= left.collect do |n| n[:rsid] end
+left_chromosome		= left.collect do |n| n[:chromosome] end
+left_position			= left.collect do |n| n[:position] end
+left_genotype			= left.collect do |n| n[:genotype] end
+
+puts "\tIndexing right data..."
+right_rsid				= right.collect do |n| n[:rsid] end
+right_chromosome	= right.collect do |n| n[:chromosome] end
+right_position				= right.collect do |n| n[:position] end
+right_genotype		= right.collect do |n| n[:genotype] end
+
+puts "Computing stuff..."
+puts "\tDetecting basic commonalities..."
+both_rsid					= left_rsid & right_rsid
+# both_position					= left_position & right_position
+
+puts "\tFinding dissimilar genotypes..."
+rsid_same = []
+rsid_diff = []
+both_rsid.each do |rsid|
+	l = left[left_rsid.index(rsid)]
+	r = right[right_rsid.index(rsid)]
+	if l[:genotype] == r[:genotype]
+		rsid_same << [l, r]
+	else
+		rsid_diff << [l, r]
+	end
+end
+
+if report_name = opt['multimarkdown']
+	puts "Writing multimarkdown report..."
+	template = ERB.new(File.read('report.md.erb'))
+	report = File.open(report_name, 'w')
+	result = template.result
+	report.write result
+end
+
+puts "Done!"

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+FILE="report"
+
+# Clean up generated files...
+rm "$FILE.html"
+rm "$FILE.odf"
+rm "$FILE.opml"
+rm "$FILE.ltx"
+
+time ./report.rb -l $1 -r $2 -m report.md
+multimarkdown -t latex -o "$FILE.ltx" "$FILE.md"
+multimarkdown -t odf -o "$FILE.odf" "$FILE.md"
+multimarkdown -t opml -o "$FILE.opml" "$FILE.md"
+multimarkdown -t html -o "$FILE.tmp" "$FILE.md"
+xsltproc xhtml-toc.xslt "$FILE.tmp" > "$FILE.html"
+rm "$FILE.tmp"
+open "$FILE.html"
