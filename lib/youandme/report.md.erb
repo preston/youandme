@@ -5,11 +5,7 @@ CSS:        report.css
 
 # SNV Comparison Report
 
-<%
-# require 'youandme'
-loader = YouAndMe::RawDataFileLoader.new
-puts "LEFT: #{@left_file}"
-%>
+<% loader = YouAndMe::RawDataFileLoader.new %>
 
 - Left file: <%= @left_file %>
 - Right file: <%= @right_file %>

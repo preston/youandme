@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 gem 'getopt', "~> 1.4.1"
 gem 'rpeg-multimarkdown',	'~> 0.1.1', :require => 'multimarkdown'
+gem 'libxslt-ruby', '~> 1.0.8	'
 
 group :development do
   gem "shoulda", ">= 0"
