@@ -30,7 +30,7 @@ module YouAndMe
 			# CSV.foreach(file_name, :col_sep => "\t") do |row|
 				# Skip if the the line is a comment
 				next if row[0][0] == '#'
-				break if max > 0 && snps.length > max
+				break if max > 0 && snps.length >= max
 				snp = {
 					:rsid => row[0],
 					:chromosome => row[1],
