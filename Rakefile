@@ -16,7 +16,7 @@ Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "youandme"
   gem.homepage = "http://github.com/preston/youandme"
-  gem.license = "MIT"
+  gem.license = "Apache 2.0"
   gem.summary = %Q{Data comparison and analysis tools for 23andme raw data files.}
   gem.description = %Q{An unofficial ruby library for quickly parsing 23andme raw data files into a plain Ruby structures for quick processing and analysis.}
   gem.email = "conmotto@gmail.com"

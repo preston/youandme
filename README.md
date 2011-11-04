@@ -1,19 +1,23 @@
-= youandme
+# youandme
 
-Description goes here.
+An unofficial Ruby library and command-line application ("youandme") for quickly parsing 23andme raw data files into a plain Ruby structures for quick processing and analysis.
 
-== Contributing to youandme
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+## Installation ##
 
-== Copyright
+    gem install youandme
 
-Copyright (c) 2011 Preston Lee. See LICENSE.txt for
-further details.
+## Command-Line Usage
 
+The primary command-line script is "youandme", which generates a simple side-by-side comparison report for two given 23andme raw data files. To generate the reports, grab a few raw 23andme data files (from 23andme.com, SNPedia etc.), and compare them like so:
+
+    bin/youandme --directory <output_directory> --left <23andme_data_file.txt> --right <23andme_data_file.txt>
+
+For "full" files, this will take a LONG time to run. (As in, probably more than 24 hours.) I recommend breaking down the data files into chromosome-size chunks, and running each comparison through this script individually.
+
+## Authors ##
+
+Preston Lee
+
+## Copyright
+
+Copyright (c) 2011 Preston Lee. See LICENSE.txt for further details.
