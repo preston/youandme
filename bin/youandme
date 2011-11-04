@@ -55,7 +55,7 @@ unless(loader.check_file(left_file) and loader.check_file(right_file))
 end
 
 puts "Parsing data files... (may take a while)"
-max_rows = 1000
+max_rows = 0
 left = loader.load_file(left_file, max_rows).sort{|a,b| a[:rsid] <=> b[:rsid]}
 puts "\tLoaded #{left.length} SNPs from #{left_file}"
 # y left[0..4]

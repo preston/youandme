@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "youandme"
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Preston Lee"]
@@ -34,7 +34,8 @@ Gem::Specification.new do |s|
     "lib/youandme/report.md.erb",
     "lib/youandme/xhtml-toc.xslt",
     "test/helper.rb",
-    "test/test_youandme.rb"
+    "test/test_youandme.rb",
+    "youandme.gemspec"
   ]
   s.homepage = "http://github.com/preston/youandme"
   s.licenses = ["Apache 2.0"]
