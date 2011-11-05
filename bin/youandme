@@ -68,6 +68,7 @@ processor.process(true)
 puts "Writing reports..."
 processor.to_multimarkdown(left_file, right_file)
 path = File.expand_path("#{opt['directory']}")
+FileUtils.mkdir_p(path)
 processor.write_multimarkdown(path)
 processor.write_latex(path)
 processor.write_html(path)
