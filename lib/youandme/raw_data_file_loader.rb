@@ -7,7 +7,14 @@ module YouAndMe
 
 		# Returns Markdown-formatted URLs for the given SNP hash.
 		def markdown_links(snp)
-			 "[dbSNP](http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?rs=#{snp[:rsid]}) [SNPedia](http://www.snpedia.com/index.php/#{snp[:rsid]})"
+		  s = ""
+		  if(!(snp[:rsid][0] == 'i'))  #how to break a string across rows?
+			  s = "[dbSNP](http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=#{snp[:rsid]}) " +
+			      " [HapMap](http://hapmap.ncbi.nlm.nih.gov/cgi-perl/gbrowse/hapmap27_B36/?name=SNP%3A#{snp[:rsid]})" +
+			      " [NextBio](http://www.nextbio.com/b/search/details/#{snp[:rsid]}?type=snp&q0=#{snp[:rsid]}&t0=snp#tab=populations)" +
+			      " [Ensembl](http://uswest.ensembl.org/Homo_sapiens/Variation/Summary?v=#{snp[:rsid]};vdb=variation)"
+		  end
+		  s
 		end
 
 		# Returns true if and only if the given file exists and is readable.
@@ -35,8 +42,11 @@ module YouAndMe
 					:rsid => row[0],
 					:chromosome => row[1],
 					:position => row[2],
-					:genotype => row[3]				
-				}
+					:genotype => row[3]
+				} 
+				if snp[:genotype].match(/[A-Z]/) == nil
+				    snp[:genotype] = '-'
+			    end
 				# y snp
 				snps << snp
 			end

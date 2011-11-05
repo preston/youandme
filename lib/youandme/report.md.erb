@@ -3,7 +3,7 @@ Subtitle:		A side-by-side comparison
 Format:			complete
 CSS:        report.css
 
-# SNV Comparison Report
+# SNV Comparison Report 
 
 <% loader = YouAndMe::RawDataFileLoader.new %>
 
@@ -14,7 +14,7 @@ CSS:        report.css
 - Differing genotypes when SNV in both profiles: <%= @rsid_diff.length %> (<%= "%.3f" % (100.0 * @rsid_diff.length / @left.length) %>% of left and <%= "%.3f" % (100.0 * @rsid_diff.length / @right.length) %>% of right.))
 - Generated <%= Time.now.strftime("%m/%d/%Y at %I:%M%p") %>.
 
-## Same Genotype
+## Same Genotype 
 
 The following <%= @rsid_same.length %> SNVs are the *same* in both profiles. Click the links in the last column for access to scientific literature.
 
@@ -25,11 +25,11 @@ The following <%= @rsid_same.length %> SNVs are the *same* in both profiles. Cli
 <% end %>
 
 
-## Different Genotype
+## Different Genotype 
 
 The follow <%= @rsid_diff.length %> SNVs *differ* between the profiles. Click the links in the last column for access to scientific literature.
 
-[Same Genotype]
+[Different Genotype]
 | rsID | Left Genotype | Right Genotype | Reference Position | Links ||
  -------- |
 <% @rsid_diff.each do |n| %><%= n[0][:rsid] %> | <%= n[0][:genotype] %> | <%= n[1][:genotype] %> | <%= n[0][:position] %> | <%= loader.markdown_links(n[0]) %>

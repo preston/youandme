@@ -117,7 +117,7 @@
 		</xsl:variable>
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
-			<a href="#ToC-{$link}">&#160;&#8617;</a>
+			<a href="#ToC-{$link}">[top]</a>
 		</xsl:copy>
 	</xsl:template>
 
@@ -127,7 +127,7 @@
 		</xsl:variable>
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
-			<a href="#ToC-{$link}">&#160;&#8617;</a>
+			<a href="#ToC-{$link}">[top]</a>
 		</xsl:copy>
 	</xsl:template>
 	
