@@ -1,9 +1,6 @@
 #!/usr/bin/env ruby
 #
 # An script to compare two 23andme SNP data files.
-#
-# Author: Preston Lee
-# License: Apache 2
 
 # Runtime libraries:
 require 'erb'
