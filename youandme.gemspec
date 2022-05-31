@@ -20,10 +20,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'getopt'
-  spec.add_runtime_dependency 'rpeg-multimarkdown'
-  spec.add_runtime_dependency 'libxslt-ruby'
+  # spec.add_runtime_dependency 'rpeg-multimarkdown'
+  # spec.add_runtime_dependency 'libxslt-ruby'
 
-  spec.add_development_dependency 'shoulda'
+  # spec.add_development_dependency 'shoulda'
   # spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'rcov'
+  # spec.add_development_dependency 'rcov'
 end
